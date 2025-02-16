@@ -1,3 +1,10 @@
+
+![WhatsApp Image 2025-02-13 at 22 07 57_96b2931b](https://github.com/user-attachments/assets/4fd34a92-1efa-44d2-a49f-7aaf6af8ab12)
+
+
+![WhatsApp Image 2025-02-13 at 22 07 58_26ce3506](https://github.com/user-attachments/assets/109a024a-ecfa-4188-8109-b4533912201a)
+
+
 Food Vision Assistant for the Blind
 
 
@@ -77,3 +84,6 @@ Voice-based interaction for capturing images.
 Integration with smart home devices.
 
 Expanded food dataset for better accuracy.
+
+
+
