@@ -1,0 +1,248 @@
+{
+    "abricot": [
+        "Apricot Jam", "Dried Apricots", "Apricot Tart",
+        "Apricot Smoothie", "Apricot Chicken", "Apricot Glazed Pork",
+        "Apricot Sorbet", "Apricot Muffins", "Apricot Chutney",
+        "Apricot Oat Bars"
+    ],
+    "apple": [
+        "Apple Pie", "Apple Crumble", "Apple Juice",
+        "Caramel Apples", "Apple Sauce", "Apple Salad",
+        "Apple Smoothie", "Baked Apples", "Apple Chutney",
+        "Apple Pancakes"
+    ],
+    "avocado": [
+        "Guacamole", "Avocado Toast", "Avocado Salad",
+        "Avocado Smoothie", "Avocado Sushi Rolls", "Avocado Ice Cream",
+        "Stuffed Avocados", "Avocado Dressing", "Avocado Brownies",
+        "Avocado Pesto Pasta"
+    ],
+    "banana": [
+        "Banana Bread", "Banana Smoothie", "Banana Pancakes",
+        "Banana Chips", "Banana Pudding", "Chocolate-Covered Bananas",
+        "Banana Oatmeal", "Banana Ice Cream", "Banana Muffins",
+        "Banana Crepes"
+    ],
+    "beet": [
+        "Beet Salad", "Beet Juice", "Beet Soup",
+        "Beet Chips", "Beet Hummus", "Beet Smoothie",
+        "Pickled Beets", "Beet Pasta", "Beet Brownies",
+        "Roasted Beets"
+    ],
+    "bell pepper": [
+        "Stuffed Bell Peppers", "Bell Pepper Stir-Fry", "Grilled Bell Peppers",
+        "Bell Pepper Soup", "Bell Pepper Fajitas", "Bell Pepper Salsa",
+        "Bell Pepper Relish", "Bell Pepper Omelette", "Bell Pepper Pizza",
+        "Bell Pepper Pasta"
+    ],
+    "bitter gourd": [
+        "Bitter Gourd Stir-Fry", "Bitter Gourd Juice", "Stuffed Bitter Gourd",
+        "Bitter Gourd Chips", "Bitter Gourd Soup", "Bitter Gourd Curry",
+        "Bitter Gourd Pickle", "Bitter Gourd Salad", "Bitter Gourd Tea",
+        "Bitter Gourd Smoothie"
+    ],
+        "broccoli": [
+            "Broccoli Stir-Fry", "Broccoli Soup", "Broccoli Salad",
+            "Broccoli Quiche", "Roasted Broccoli", "Broccoli Casserole",
+            "Broccoli Pasta", "Steamed Broccoli", "Broccoli Rice",
+            "Broccoli Fritters"
+        ],
+    "cabbage": [
+        "Cabbage Stir-Fry", "Coleslaw", "Cabbage Soup",
+        "Stuffed Cabbage Rolls", "Cabbage Curry", "Pickled Cabbage",
+        "Cabbage Slaw", "Cabbage Pancakes", "Cabbage Wraps",
+        "Cabbage Kimchi"
+    ],
+    "carrot": [
+        "Carrot Cake", "Carrot Juice", "Carrot Soup",
+        "Carrot Stir-Fry", "Carrot Muffins", "Carrot Salad",
+        "Glazed Carrots", "Carrot Hummus", "Carrot Chips",
+        "Carrot Smoothie"
+    ],
+    "cauliflower": [
+        "Cauliflower Rice", "Cauliflower Soup", "Buffalo Cauliflower",
+        "Cauliflower Mash", "Roasted Cauliflower", "Cauliflower Pizza Crust",
+        "Cauliflower Stir-Fry", "Cauliflower Tacos", "Cauliflower Gratin",
+        "Cauliflower Tempura"
+    ],
+    "corn": [
+        "Corn on the Cob", "Cornbread", "Corn Fritters",
+        "Corn Salad", "Corn Soup", "Popcorn",
+        "Grilled Corn", "Corn Pudding", "Corn Salsa",
+        "Corn Casserole"
+    ],
+    "cucumber": [
+        "Cucumber Salad", "Tzatziki Sauce", "Cucumber Sandwich",
+        "Cucumber Juice", "Pickled Cucumbers", "Cucumber Soup",
+        "Cucumber Sushi Rolls", "Cucumber Lemonade",
+        "Cucumber Face Mask", "Cucumber Raita"
+    ],
+    "custard apple": [
+        "Custard Apple Ice Cream", "Custard Apple Shake", "Custard Apple Pudding",
+        "Custard Apple Tart", "Custard Apple Mousse", "Custard Apple Smoothie",
+        "Custard Apple Yogurt", "Custard Apple Jam", "Custard Apple Cheesecake",
+        "Custard Apple Sorbet"
+    ],
+    "durian": [
+        "Durian Cake", "Durian Ice Cream", "Durian Pudding",
+        "Durian Smoothie", "Durian Pastry", "Durian Candy",
+        "Durian Cheesecake", "Durian Custard", "Durian Chips",
+        "Durian Shake"
+    ],
+    "eggplant": [
+        "Eggplant Parmesan", "Eggplant Curry", "Baba Ganoush",
+        "Eggplant Stir-Fry", "Eggplant Lasagna", "Stuffed Eggplant",
+        "Grilled Eggplant", "Eggplant Chips", "Eggplant Pizza",
+        "Eggplant Casserole"
+    ],
+    "fig": [
+        "Fig Jam", "Dried Figs", "Fig Tart",
+        "Fig Smoothie", "Fig and Cheese Salad", "Stuffed Figs",
+        "Fig Ice Cream", "Fig Muffins", "Fig Energy Bars",
+        "Fig Glaze"
+    ],
+    "garlic": [
+        "Garlic Bread", "Roasted Garlic", "Garlic Butter Sauce",
+        "Garlic Soup", "Garlic Stir-Fry", "Garlic Pasta",
+        "Pickled Garlic", "Garlic Mashed Potatoes", "Garlic Confit",
+        "Garlic Aioli"
+    ],
+    "grape": [
+        "Grape Juice", "Grape Salad", "Grape Jam",
+        "Grape Smoothie", "Grape Sorbet", "Roasted Grapes",
+        "Grape Compote", "Grape Salsa", "Grape Yogurt",
+        "Grape Popsicles"
+    ],
+    "hot pepper": [
+        "Hot Pepper Sauce", "Stuffed Hot Peppers", "Hot Pepper Pickle",
+        "Spicy Salsa", "Hot Pepper Soup", "Hot Pepper Stir-Fry",
+        "Hot Pepper Jam", "Hot Pepper Chutney", "Hot Pepper Relish",
+        "Hot Pepper Powder"
+    ],
+    "kiwi": [
+        "Kiwi Smoothie", "Kiwi Salad", "Kiwi Sorbet",
+        "Kiwi Tart", "Kiwi Popsicles", "Kiwi Jam",
+        "Kiwi Yogurt", "Kiwi Salsa", "Kiwi Muffins",
+        "Kiwi Cheesecake"
+    ],
+    "lemon": [
+        "Lemonade", "Lemon Tart", "Lemon Chicken",
+        "Lemon Cake", "Lemon Curd", "Lemon Pasta",
+        "Lemon Sorbet", "Lemon Rice", "Lemon Dressing",
+        "Lemon Muffins"
+    ],
+    "mango": [
+        "Mango Lassi", "Mango Salad", "Mango Ice Cream",
+        "Mango Smoothie", "Mango Sorbet", "Mango Chutney",
+        "Mango Cheesecake", "Mango Salsa", "Mango Mousse",
+        "Mango Pickle"
+    ],
+    "melon": [
+        "Melon Salad", "Melon Smoothie", "Melon Sorbet",
+        "Melon Juice", "Melon Salsa", "Melon Popsicles",
+        "Melon Jam", "Melon Gazpacho", "Melon Bowl",
+        "Melon Granita"
+    ],
+     "onion": [
+        "Onion Rings", "French Onion Soup", "Caramelized Onions",
+        "Onion Bhaji", "Pickled Onions", "Onion Dip",
+        "Onion Pizza", "Onion Salad", "Onion Tart",
+        "Onion Gravy"
+    ],
+    "orange": [
+        "Orange Juice", "Orange Chicken", "Orange Marmalade",
+        "Orange Cake", "Orange Salad", "Orange Smoothie",
+        "Orange Sorbet", "Candied Orange Peel", "Orange Crepes",
+        "Orange Glaze"
+    ],
+    "papaya": [
+        "Papaya Salad", "Papaya Smoothie", "Papaya Juice",
+        "Papaya Salsa", "Papaya Sorbet", "Papaya Popsicles",
+        "Papaya Jam", "Papaya Chutney", "Green Papaya Salad",
+        "Papaya Yogurt"
+    ],
+    "peach": [
+        "Peach Cobbler", "Peach Pie", "Peach Jam",
+        "Peach Smoothie", "Peach Salsa", "Grilled Peaches",
+        "Peach Ice Cream", "Peach Melba", "Peach Tea",
+        "Peach Yogurt"
+    ],
+    "pear": [
+        "Pear Tart", "Pear Salad", "Pear Crumble",
+        "Poached Pears", "Pear Jam", "Pear Smoothie",
+        "Pear Chutney", "Pear and Blue Cheese Pizza", "Pear Sorbet",
+        "Pear Crisp"
+    ],
+    "persimmon": [
+        "Persimmon Pudding", "Persimmon Bread", "Persimmon Salad",
+        "Dried Persimmon", "Persimmon Smoothie", "Persimmon Jam",
+        "Persimmon Sorbet", "Persimmon Cookies", "Persimmon Cake",
+        "Persimmon Yogurt"
+    ],
+    "pineapple": [
+        "Pineapple Fried Rice", "Pineapple Smoothie", "Pineapple Salsa",
+        "Pineapple Upside-Down Cake", "Grilled Pineapple", "Pineapple Juice",
+        "Pineapple Chutney", "Pineapple Pizza", "Pineapple Jam",
+        "Pineapple Sorbet"
+    ],
+    "plum": [
+        "Plum Jam", "Plum Tart", "Plum Cake",
+        "Plum Smoothie", "Plum Sauce", "Plum Pudding",
+        "Pickled Plums", "Plum Crumble", "Plum Sorbet",
+        "Plum Wine"
+    ],
+    "pomegranate": [
+        "Pomegranate Juice", "Pomegranate Salad", "Pomegranate Molasses",
+        "Pomegranate Smoothie", "Pomegranate Seeds", "Pomegranate Vinaigrette",
+        "Pomegranate Jelly", "Pomegranate Sorbet", "Pomegranate Glaze",
+        "Pomegranate Yogurt"
+    ],
+    "potato": [
+        "Mashed Potatoes", "Potato Salad", "French Fries",
+        "Baked Potato", "Potato Soup", "Potato Chips",
+        "Scalloped Potatoes", "Potato Curry", "Potato Pancakes",
+        "Potato Skins"
+    ],
+    "pumpkin": [
+        "Pumpkin Pie", "Pumpkin Soup", "Pumpkin Bread",
+        "Pumpkin Spice Latte", "Pumpkin Muffins", "Pumpkin Cheesecake",
+        "Pumpkin Risotto", "Pumpkin Curry", "Pumpkin Pancakes",
+        "Roasted Pumpkin Seeds"
+    ],
+    "radish": [
+        "Radish Salad", "Pickled Radishes", "Radish Sprouts",
+        "Radish Soup", "Radish and Butter", "Radish Greens Pesto",
+        "Roasted Radishes", "Radish Dip", "Radish Kimchi",
+        "Radish Tzatziki"
+    ],
+    "strawberry": [
+        "Strawberry Smoothie", "Strawberry Jam", "Strawberry Shortcake",
+        "Strawberry Pie", "Strawberry Salad", "Chocolate Covered Strawberries",
+        "Strawberry Ice Cream", "Strawberry Lemonade", "Strawberry Tart",
+        "Strawberry Yogurt"
+    ],
+    "tomato": [
+        "Tomato Soup", "Tomato Sauce", "Tomato Salad",
+        "Bruschetta", "Tomato Juice", "Sun-Dried Tomatoes",
+        "Stuffed Tomatoes", "Tomato Salsa", "Tomato Chutney",
+        "Tomato Pasta"
+    ],
+    "turnip": [
+        "Mashed Turnips", "Roasted Turnips", "Turnip Greens",
+        "Turnip Soup", "Pickled Turnips", "Turnip Fries",
+        "Turnip Cake", "Turnip and Potato Gratin", "Glazed Turnips",
+        "Turnip Curry"
+    ],
+    "watermelon": [
+        "Watermelon Salad", "Watermelon Juice", "Watermelon Smoothie",
+        "Watermelon Sorbet", "Watermelon Gazpacho", "Watermelon Popsicles",
+        "Watermelon Salsa", "Watermelon Rind Pickles", "Watermelon Granita",
+        "Watermelon Agua Fresca"
+    ],
+    "zucchini": [
+        "Zucchini Bread", "Zucchini Noodles", "Zucchini Fritters",
+        "Stuffed Zucchini", "Zucchini Soup", "Grilled Zucchini",
+        "Zucchini Muffins", "Zucchini Lasagna", "Zucchini Chips",
+        "Zucchini Boats"
+    ]
+}
