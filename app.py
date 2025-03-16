@@ -8,6 +8,7 @@ import base64
 import time
 import logging
 from inference_sdk import InferenceHTTPClient
+from flask_socketio import SocketIO
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -22,12 +23,14 @@ tts_lock = threading.Lock()
 engine = None
 shutdown_flag = threading.Event()
 
+# Initialize Flask-SocketIO
+socketio = SocketIO(app)
+
 
 def init_tts_engine():
     """Initialize TTS engine with error handling"""
     try:
         engine = pyttsx3.init()
-        # Configure the engine
         engine.setProperty('rate', 150)  # Speed of speech
         engine.setProperty('volume', 0.9)  # Volume level
         voices = engine.getProperty('voices')
@@ -80,11 +83,10 @@ def tts_worker():
 
                 tts_queue.task_done()
             except queue.Empty:
-                continue  # Keep running if queue is empty
+                continue
             except Exception as e:
                 logger.error(f"TTS Error while speaking: {str(e)}")
                 engine = init_tts_engine()  # Try to reinitialize
-
     except Exception as e:
         logger.error(f"Fatal TTS worker error: {str(e)}")
     finally:
@@ -95,7 +97,6 @@ def speak(text):
     """Queue text for TTS with verification"""
     if not text or shutdown_flag.is_set():
         return
-
     try:
         logger.debug(f"Queuing text to speak: {text}")
         tts_queue.put(text)
@@ -103,7 +104,7 @@ def speak(text):
         logger.error(f"Error queuing text to speak: {str(e)}")
 
 
-# Start TTS thread with error handling
+# Start TTS thread
 try:
     tts_thread = threading.Thread(target=tts_worker, daemon=True)
     tts_thread.start()
@@ -141,8 +142,14 @@ def index():
     time.sleep(0.5)
     speak("Please place your food item in front of the camera")
     time.sleep(0.5)
-    speak("When ready, press C to capture the image")
+    speak("When ready, press C to capture the image or say 'capture'")
     return render_template('index.html')
+
+
+@socketio.on('connect')
+def handle_connect():
+    """Handle WebSocket connection"""
+    logger.info("Client connected via WebSocket")
 
 
 @app.route('/capture', methods=['POST'])
@@ -177,18 +184,15 @@ def capture():
                 global current_suggestions
                 current_suggestions = suggestions
 
-                # Clear voice guidance
                 speak(f"I detected a {best['class']} with {best['confidence'] * 100:.1f}% confidence")
                 time.sleep(0.8)
 
                 if suggestions:
                     speak("Here are the suggested dishes you can make")
                     time.sleep(0.5)
-
                     for i, dish in enumerate(suggestions, 1):
                         speak(f"Number {i}: {dish}")
                         time.sleep(0.8)
-
                     speak("To hear any recipe, press its number on your keyboard")
 
                 return jsonify({
@@ -201,7 +205,6 @@ def capture():
             else:
                 speak("No food items were detected. Please try again with a clearer image")
                 return jsonify({"message": "No detection", "status": "error"}), 400
-
         except Exception as e:
             logger.error(f"Capture error: {str(e)}")
             speak("An error occurred during processing. Please try again")
@@ -209,15 +212,13 @@ def capture():
 
 
 from difflib import get_close_matches
-from flask import render_template
+from fuzzywuzzy import process
+
 
 def find_closest_recipe(dish_name, recipe_dict):
     """Find the closest matching recipe name if exact match isn't found."""
     matches = get_close_matches(dish_name, recipe_dict.keys(), n=1, cutoff=0.5)
     return matches[0] if matches else None
-
-
-from fuzzywuzzy import process
 
 
 @app.route('/recipe/<int:number>', methods=['POST'])
@@ -226,14 +227,10 @@ def get_recipe_by_number(number):
     try:
         if 1 <= number <= len(current_suggestions):
             selected_dish = current_suggestions[number - 1].strip().lower()
-
-            # Fuzzy match the dish name
             best_match, score = process.extractOne(selected_dish, recipes.keys())
 
-            if score >= 80:  # Only accept matches with 80%+ similarity
+            if score >= 80:
                 recipe = recipes[best_match]
-
-                # Speak ingredients
                 speak(f"Here's how to make {best_match}")
                 time.sleep(0.5)
                 speak("You will need these ingredients:")
@@ -241,15 +238,12 @@ def get_recipe_by_number(number):
                 for ingredient in recipe.get('ingredients', []):
                     speak(ingredient)
                     time.sleep(0.8)
-
-                # Speak instructions
                 speak("Now, follow these steps:")
                 time.sleep(0.5)
                 for i, step in enumerate(recipe.get('instructions', []), 1):
                     speak(f"Step {i}: {step}")
                     time.sleep(1)
-
-                # Ask if user wants to continue
+                speak("At any time, you can say 'home' or 'back' to return to the main screen")
                 speak("Would you like to try another dish? Press Y for yes, or N for no")
 
                 return render_template(
@@ -264,25 +258,22 @@ def get_recipe_by_number(number):
         else:
             speak(f"Please press a number between 1 and {len(current_suggestions)}")
             return render_template("error.html", message="Invalid selection"), 400
-
     except Exception as e:
         logger.error(f"Recipe error: {str(e)}")
         speak("An error occurred while getting the recipe. Please try again")
         return render_template("error.html", message="Something went wrong"), 500
 
 
-
 @app.route('/continue', methods=['POST'])
 def continue_session():
     """Handle continuation with clear voice guidance"""
     choice = request.json.get('choice', '').lower()
-
     if choice == 'y':
         speak("Great! Let's try another dish")
         time.sleep(0.5)
         speak("Please place your next food item in front of the camera")
         time.sleep(0.5)
-        speak("Press C when ready to capture")
+        speak("Press C when ready to capture, or say 'capture'")
         return jsonify({"status": "continue"})
     elif choice == 'n':
         speak("Thank you for using Food Vision Assistant")
@@ -292,6 +283,26 @@ def continue_session():
     else:
         speak("Please press Y for yes or N for no")
         return jsonify({"error": "Invalid choice", "status": "error"}), 400
+
+
+@app.route('/go-home', methods=['POST'])
+def go_home():
+    """Handle returning to home screen"""
+    speak("Returning to home screen")
+    return jsonify({"status": "home"})
+
+
+@socketio.on('voice_command')
+def handle_voice_command(data):
+    """Handle voice commands via WebSocket"""
+    command = data.get('command', '').lower()
+    logger.info(f"Received voice command: {command}")
+
+    if command in ['home', 'back', 'return']:
+        socketio.emit('redirect', {'url': '/'})
+        return {'status': 'success', 'action': 'redirect'}
+
+    return {'status': 'error', 'message': 'Unknown command'}
 
 
 @app.errorhandler(404)
@@ -312,14 +323,13 @@ def shutdown_server():
     """Graceful shutdown of the server"""
     shutdown_flag.set()
     speak("System shutting down")
-    time.sleep(1)  # Give time for final message
+    time.sleep(1)
     tts_queue.put(None)
     tts_thread.join(timeout=1)
-
 
 if __name__ == '__main__':
     try:
         speak("Food Vision Assistant is ready")
-        app.run(debug=False, threaded=True)
+        socketio.run(app, debug=False)
     finally:
         shutdown_server()
