@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Vision Assistant | Recipe: {{ dish }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body data-page="recipe">
+    <header class="bg-primary text-white py-4">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">🍴 Food Vision Assistant</h1>
+                <div class="d-flex align-items-center">
+                    <div class="form-check form-switch me-3">
+                        <input class="form-check-input" type="checkbox" id="voiceToggle" checked>
+                        <label class="form-check-label" for="voiceToggle">Voice Feedback</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="voiceCommandsToggle" checked>
+                        <label class="form-check-label" for="voiceCommandsToggle">Voice Commands</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <div class="card shadow-lg">
+            <div class="card-header bg-white">
+                <h2 class="mb-0">📝 Recipe: {{ dish }}</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <h3 class="mb-4">🥕 Ingredients</h3>
+                        <ul class="list-group">
+                            {% for ingredient in ingredients %}
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="me-2">✔️</span>
+                                {{ ingredient }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="mb-4">👩🍳 Instructions</h3>
+                        <ol class="list-group list-group-numbered">
+                            {% for step in instructions %}
+                            <li class="list-group-item d-flex align-items-start">
+                                <span class="badge bg-primary me-2">{{ loop.index }}</span>
+                                {{ step }}
+                            </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+                <div class="alert alert-info mt-4">
+                    <strong>Tip:</strong> Say "back" or "home" to return to the scanner.
+                </div>
+                <div class="mt-4 text-center">
+                    <a href="/" class="btn btn-outline-primary me-2">← Back to Scanner</a>
+                    <button class="btn btn-secondary me-2" id="tryContinueBtn">Try Another (Y)</button>
+                    <button class="btn btn-secondary" id="exitBtn">Exit (N)</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Voice Command Toast -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 5">
+        <div id="voiceCommandToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">🎤 Voice Command</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div id="voiceCommandToastBody" class="toast-body">
+                Command detected
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const socket = io();
+            let recognition = null;
+
+            // WebSocket navigation handler
+            socket.on('navigation_command', function(data) {
+                if (data.command === 'go_home') {
+                    handleNavigation();
+                }
+            });
+
+            // Button handlers
+            document.getElementById('tryContinueBtn').addEventListener('click', () => handleContinue('y'));
+            document.getElementById('exitBtn').addEventListener('click', () => handleContinue('n'));
+
+            // Initialize voice commands for recipe page
+            initSpeechRecognition();
+
+            function handleContinue(choice) {
+                if (recognition) recognition.stop();
+                fetch('/continue', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ choice })
+                }).then(() => window.location.href = '/');
+            }
+
+            function handleNavigation() {
+                if (recognition) {
+                    recognition.stop();
+                    recognition = null;
+                }
+                window.location.href = '/';
+            }
+
+            function initSpeechRecognition() {
+                if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    recognition = new SpeechRecognition();
+                    recognition.continuous = true;
+                    recognition.lang = 'en-US';
+
+                    recognition.onresult = function(event) {
+                        const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase();
+                        showVoiceCommandToast(transcript);
+
+                        if (transcript.includes('home') || transcript.includes('back')) {
+                            handleNavigation();
+                        }
+                    };
+
+                    recognition.start();
+                }
+            }
+
+            function showVoiceCommandToast(command) {
+                const toast = new bootstrap.Toast(document.getElementById('voiceCommandToast'));
+                document.getElementById('voiceCommandToastBody').textContent = `Heard: "${command}"`;
+                toast.show();
+            }
+        });
+    </script>
+</body>
+</html>
